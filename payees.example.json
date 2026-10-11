@@ -1,0 +1,10 @@
+{
+  "payees": [
+    {
+      "name": "Northwind Supplies",
+      "accounts": ["DE89370400440532013000"],
+      "emails": ["billing@northwind.example.org"],
+      "domains": ["northwind.example.org"]
+    }
+  ]
+}

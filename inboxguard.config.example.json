@@ -1,0 +1,20 @@
+{
+  "upstreams": {
+    "mail": {
+      "command": "node",
+      "args": ["scripts/mock-upstream.js"],
+      "env": {}
+    }
+  },
+  "payeesPath": "payees.example.json",
+  "auditLogPath": "inboxguard-audit.jsonl",
+  "limits": {
+    "upstreamTimeoutMs": 30000,
+    "maxResultBytes": 2097152,
+    "approvalTtlMs": 300000,
+    "maxPendingApprovals": 20
+  },
+  "approval": {
+    "openBrowser": true
+  }
+}
