@@ -1,0 +1,16 @@
+:root {
+  color-scheme: light dark;
+  font:
+    15px/1.5 system-ui,
+    sans-serif;
+}
+main {
+  max-width: 560px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+label {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}

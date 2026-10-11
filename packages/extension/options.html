@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>inboxguard options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main>
+      <h1>inboxguard</h1>
+      <p>
+        inboxguard checks opened emails in Gmail and Outlook on the web for hidden content aimed at
+        AI assistants. It makes no network calls and stores nothing from your email.
+      </p>
+      <label>
+        <input type="checkbox" id="neutralize" />
+        Clear hidden text in the page when a message is amber or red, so a browser-based AI agent
+        does not read it
+      </label>
+      <p id="status" role="status" aria-live="polite"></p>
+    </main>
+    <script src="options.js"></script>
+  </body>
+</html>
