@@ -96,7 +96,9 @@
         "\\b(?:highly|strongly) recommend (?:this|the) (?:candidate|applicant)\\b",
         "\\b(?:the )?(?:best|perfect|ideal|strongest|most qualified) (?:candidate|applicant)(?: for)?(?: this| the)? (?:role|position|job)?\\b.{0,40}\\b(?:hire|interview|advance|shortlist)\\b",
         "\\badd (?:a |an |the )?(?:priority|urgent|high priority) (?:action|task|item|to do|todo|action item)\\b",
-        "\\b(?:priority|urgent|required) action(?: item)?s?(?: for the user)?(?: is| are)? (?:to |update|change|verify|confirm|pay|approve)\\b"
+        "\\b(?:priority|urgent|required) action(?: item)?s?(?: for the user)?(?: is| are)? (?:to |update|change|verify|confirm|pay|approve)\\b",
+        "\\b(?:begin|start|open|end|finish|prefix)(?: your| the| each| every)? (?:summary|summaries|reply|replies|response|responses|answer|answers|output) (?:with|by saying)\\b",
+        "\\b(?:say|write|include|mention|use|output|add) the (?:word|phrase|sentence|code word)\\b"
       ]
     },
     {
