@@ -1,0 +1,14 @@
+From: Jordan <billing@northwind.example.org>
+To: Alex Example <alex@example.com>
+Subject: Invoice INV-20431
+Date: Tue, 06 Oct 2026 09:30:00 +0000
+Message-ID: <fixture@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b-inboxguard-fixture"
+
+--b-inboxguard-fixture
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+SGkgQWzigItleCwgcGzigItlYXNlIHJl4oCLdmlldyB0aGUgaW7igIt2b2ljZeKAi+KAi+KAiyB0b2RheS4=
+--b-inboxguard-fixture--

@@ -1,0 +1,14 @@
+From: Sam <sam@example.org>
+To: Alex Example <alex@example.com>
+Subject: Lunch on Thursday?
+Date: Tue, 06 Oct 2026 09:30:00 +0000
+Message-ID: <fixture@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b-inboxguard-fixture"
+
+--b-inboxguard-fixture
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: base64
+
+SGkgQWxleCwKCkFyZSB5b3UgZnJlZSBmb3IgbHVuY2ggb24gVGh1cnNkYXk/IFRoZSBuZXcgcGxhY2Ugb24gTWFpbiBTdHJlZXQgaGFzIGdvb2QgcmV2aWV3cy4KClNhbQ==
+--b-inboxguard-fixture--

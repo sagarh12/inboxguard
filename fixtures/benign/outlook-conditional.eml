@@ -1,0 +1,14 @@
+From: Facilities <facilities@example.com>
+To: Alex Example <alex@example.com>
+Subject: Office closed Monday
+Date: Tue, 06 Oct 2026 09:30:00 +0000
+Message-ID: <fixture@example.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b-inboxguard-fixture"
+
+--b-inboxguard-fixture
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: base64
+
+PCFkb2N0eXBlIGh0bWw+PGh0bWw+PGhlYWQ+PG1ldGEgY2hhcnNldD0idXRmLTgiPjwvaGVhZD48Ym9keSBzdHlsZT0iYmFja2dyb3VuZDojZmZmZmZmO2NvbG9yOiMyMjIyMjI7Zm9udC1mYW1pbHk6QXJpYWwiPjwhLS1baWYgbXNvXT48dGFibGUgcm9sZT0icHJlc2VudGF0aW9uIiB3aWR0aD0iNjAwIj48dHI+PHRkPjwhW2VuZGlmXS0tPjxwPlRoZSBvZmZpY2Ugd2lsbCBiZSBjbG9zZWQgb24gTW9uZGF5IGZvciBtYWludGVuYW5jZSBvZiB0aGUgaGVhdGluZyBzeXN0ZW0uPC9wPjwhLS1baWYgbXNvXT48L3RkPjwvdHI+PC90YWJsZT48IVtlbmRpZl0tLT48IS0tW2lmICFtc29dPjwhLS0+PGRpdiBzdHlsZT0ibWF4LXdpZHRoOjYwMHB4Ij5IYXZlIGEgZ29vZCB3ZWVrZW5kLjwvZGl2PjwhLS08IVtlbmRpZl0tLT48L2JvZHk+PC9odG1sPg==
+--b-inboxguard-fixture--
