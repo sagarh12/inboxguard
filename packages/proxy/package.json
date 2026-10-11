@@ -1,0 +1,13 @@
+{
+  "name": "@inboxguard/proxy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "inboxguard-proxy": "src/server.js"
+  },
+  "dependencies": {
+    "@inboxguard/core": "0.1.0"
+  }
+}
