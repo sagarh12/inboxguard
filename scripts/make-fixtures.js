@@ -343,6 +343,13 @@ const benign = {
     subject: 'Re: Schedule for next week',
     text: 'Thanks, Tuesday works.\n\nOn Mon, Oct 5, 2026, Riley wrote:\n> Executive Assistant: Jamie Lee\n> System: the booking tool will be down Friday.\n> Can we move the review to Tuesday?',
   }),
+  'community-digest-preview.eml': eml({
+    from: 'Neighbourhood Digest <digest@example.com>',
+    subject: 'New posts near you',
+    html: page(
+      `<table width="100%"><tr><td style="display:none">${'A neighbour is looking for help with fall yard cleanup, raking leaves and trimming hedges this weekend. They have tools and can pay a fair hourly rate. Reply on the post if you are interested or know someone reliable nearby. '.repeat(2)}</td></tr><tr><td><h1>New posts near you</h1><p>3 new posts in your area this week.</p><a href="https://example.com/digest">See posts</a></td></tr></table>`,
+    ),
+  }),
   'japanese-notice.eml': eml({
     from: 'Store <info@store.example.org>',
     subject: 'ご注文ありがとうございます',

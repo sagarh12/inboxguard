@@ -31,7 +31,7 @@ scripts             style checker, bench, fixture generator, mock upstream, icon
 | Invisible-character abuse | medium, or low for one isolated character |
 | Any limit reached, or internal failure | medium |
 | Hidden text without instructions | low |
-| Preheader: short hidden text near the top | info |
+| Preheader: hidden text up to 1000 characters near the top | info |
 | Visible instruction phrases not addressed to an AI | info |
 
 The verdict follows the highest severity: high is `malicious`, medium is `suspicious`, anything else is `clean`.

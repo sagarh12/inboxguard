@@ -4,7 +4,7 @@ import { escapeForSnippet } from './unicode.js';
 const SEVERITY_RANK = { info: 0, low: 1, medium: 2, high: 3 };
 const SEVERITY_BASE = { info: 0, low: 10, medium: 40, high: 80 };
 const SEVERITY_CEILING = { info: 9, low: 29, medium: 69, high: 100 };
-const PREHEADER_MAX_LENGTH = 300;
+const PREHEADER_MAX_LENGTH = 1000;
 
 export function createCollector(budget) {
   const limits = budget.limits;

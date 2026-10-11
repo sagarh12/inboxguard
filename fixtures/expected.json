@@ -37,5 +37,6 @@
   "benign/responsive-hidden-variant.eml": "clean",
   "benign/german-soft-hyphen.eml": "clean",
   "benign/reply-thread.eml": "clean",
+  "benign/community-digest-preview.eml": "clean",
   "benign/japanese-notice.eml": "clean"
 }
