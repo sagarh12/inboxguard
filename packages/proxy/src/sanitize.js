@@ -3,7 +3,7 @@ import { inspectEmail } from '@inboxguard/core';
 
 const VERDICT_RANK = { clean: 0, suspicious: 1, malicious: 2 };
 const CONTENT_KEYS =
-  /^(?:body|text|html|content|snippet|message|description|summary|preview|plain|textbody|htmlbody|body_?text|body_?html|raw|data|value|note|notes|comment)$/i;
+  /^(?:body|text|html|content|snippet|message|description|summary|preview|plain|plain_?text|plain_?text_?body|text_?body|html_?body|body_?text|body_?html|body_?preview|unique_?body|raw|data|value|note|notes|comment)$/i;
 const KEEP_KEYS =
   /^(?:id|threadid|messageid|historyid|internaldate|date|labelids|mimetype|uri|url|href|type|partid|filename|size|attachmentid|sizeestimate|name|email|from|to|cc|bcc|subject|role|cursor|nextpagetoken)$/i;
 const LOOKS_LIKE_HTML = /<(?:!doctype|html|body|div|p|span|table|td|br|a|img|style|!--)[\s>/]/i;
@@ -53,6 +53,7 @@ function createContext(options) {
     id: options.callId ?? randomBytes(8).toString('hex'),
     limits: options.limits ?? {},
     verdict: 'clean',
+    maliciousCount: 0,
     findingKinds: new Set(),
     truncated: false,
   };
@@ -75,7 +76,10 @@ function inspectString(text, context, asHtml) {
 }
 
 function renderContent(result, context) {
-  if (result.verdict === 'malicious') return NOTICES.malicious(findingKinds(result));
+  if (result.verdict === 'malicious') {
+    context.maliciousCount += 1;
+    return NOTICES.malicious(findingKinds(result));
+  }
   const body = wrap(result.cleanedText, context.id);
   return result.verdict === 'suspicious' ? `${NOTICES.suspicious}\n${body}` : body;
 }
@@ -87,7 +91,10 @@ function sanitizeEmailText(text, context) {
 
 function sanitizeShortField(text, context) {
   const result = inspectString(text, context, false);
-  if (result.verdict === 'malicious') return NOTICES.maliciousField;
+  if (result.verdict === 'malicious') {
+    context.maliciousCount += 1;
+    return NOTICES.maliciousField;
+  }
   const changed = result.findings.some((f) => f.severity !== 'info') || LOOKS_LIKE_HTML.test(text);
   return changed ? stripDelimiterLookalikes(result.cleanedText) : stripDelimiterLookalikes(text);
 }
@@ -135,7 +142,58 @@ function sanitizeValue(value, context, key = '', depth = 0) {
   return sanitizeObjectFields(value, context, depth, new Set());
 }
 
+const MESSAGE_ID_KEYS = ['id', 'messageId', 'threadId'];
+const MESSAGE_BODY_KEYS = [
+  'payload',
+  'snippet',
+  'htmlBody',
+  'plaintextBody',
+  'body',
+  'text',
+  'html',
+  'subject',
+];
+
+function isMessageLike(object) {
+  return (
+    MESSAGE_ID_KEYS.some((key) => key in object) && MESSAGE_BODY_KEYS.some((key) => key in object)
+  );
+}
+
+function isMaliciousNotice(value) {
+  return value === NOTICES.maliciousField || value.startsWith('[inboxguard: hidden instructions');
+}
+
+function isBodyField(field, value) {
+  return (
+    typeof value === 'string' &&
+    CONTENT_KEYS.test(field) &&
+    !KEEP_KEYS.test(field) &&
+    !isMaliciousNotice(value)
+  );
+}
+
+function redactBodies(value, notice, depth = 0) {
+  if (depth > MAX_JSON_DEPTH || !value || typeof value !== 'object') return value;
+  if (Array.isArray(value)) return value.map((item) => redactBodies(item, notice, depth + 1));
+  if (isGmailPart(value) && TEXT_MIME.test(String(value.mimeType ?? ''))) {
+    return {
+      ...value,
+      mimeType: 'text/plain',
+      body: { ...value.body, data: encodeBase64Url(notice), size: Buffer.byteLength(notice) },
+    };
+  }
+  const out = {};
+  for (const [field, item] of Object.entries(value)) {
+    if (field === 'headers') out[field] = item;
+    else if (isBodyField(field, item)) out[field] = notice;
+    else out[field] = redactBodies(item, notice, depth + 1);
+  }
+  return out;
+}
+
 function sanitizeObjectFields(object, context, depth, skip) {
+  const before = context.maliciousCount;
   const out = {};
   for (const [field, item] of Object.entries(object)) {
     if (skip.has(field)) out[field] = item;
@@ -143,7 +201,8 @@ function sanitizeObjectFields(object, context, depth, skip) {
       out[field] = sanitizeHeaders(item, context);
     else out[field] = sanitizeValue(item, context, field, depth + 1);
   }
-  return out;
+  if (context.maliciousCount === before || !isMessageLike(object)) return out;
+  return redactBodies(out, NOTICES.malicious([...context.findingKinds]));
 }
 
 function sanitizeStringValue(text, context, key, depth) {
