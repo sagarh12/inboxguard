@@ -1,0 +1,47 @@
+{
+  "language": "hi",
+  "coverage": "Small set. Devanagari and romanized Hinglish forms of override, concealment, steering and payment-change phrases. Not exhaustive.",
+  "rules": [
+    {
+      "id": "hi.override.ignore-previous",
+      "category": "override",
+      "patterns": [
+        "(?:पिछले|पिछली|पूर्व|ऊपर के|ऊपर दिए|सभी|पहले के)(?: सभी| सारे)? (?:निर्देश|निर्देशों|आदेश|आदेशों|नियम|नियमों)(?: को)? (?:अनदेखा|नज़रअंदाज़|नजरअंदाज|भूल|अनसुना)",
+        "\\b(?:pichle|pichhle|purane|upar ke|pehle ke)(?: sabhi| saare| sare| sab)? (?:nirdesh|instructions?|aadesh|rules)(?: ko)? (?:ignore|bhool|bhul|nazarandaz|najarandaz)\\b",
+        "\\b(?:sab|sabhi|saare) (?:instructions?|nirdesh)(?: ko)? (?:ignore|bhool|bhul) (?:karo|kar do|kare|karein|jao)\\b"
+      ]
+    },
+    {
+      "id": "hi.concealment",
+      "category": "concealment",
+      "patterns": [
+        "(?:उपयोगकर्ता|यूज़र|यूजर|प्राप्तकर्ता) को (?:कुछ )?(?:मत|न|ना) (?:बताएं|बताना|बताओ|बताएँ|बताइए)",
+        "\\b(?:user|recipient) ko (?:kuch )?(?:mat|na|nahi) (?:batana|batao|bataye|bataen|bataiye)\\b"
+      ]
+    },
+    {
+      "id": "hi.steering",
+      "category": "steering",
+      "patterns": [
+        "(?:इस|यह) (?:ईमेल|मेल|संदेश) को (?:ज़रूरी|जरूरी|सुरक्षित|वैध|महत्वपूर्ण|अत्यावश्यक) (?:बताएं|बताओ|मार्क करें|मार्क करो|चिह्नित करें|दिखाएं)",
+        "\\b(?:is|yeh|ye) (?:email|mail|message) ko (?:zaroori|jaruri|zaruri|safe|surakshit|important|urgent) (?:batao|bataye|mark karo|mark karein|dikhao)\\b"
+      ]
+    },
+    {
+      "id": "hi.money-data",
+      "category": "money-data",
+      "patterns": [
+        "(?:भुगतान|बैंक|खाता|वेंडर) (?:विवरण|जानकारी|डिटेल्स|नंबर) (?:बदलें|बदल दें|बदलो|अपडेट करें)",
+        "\\b(?:payment|bank|vendor|account) (?:details?|jankari|number) (?:badal|change|update) (?:do|dein|karo|karein|kar do)\\b"
+      ]
+    },
+    {
+      "id": "hi.addressing",
+      "category": "addressing-ai",
+      "patterns": [
+        "(?:जब|अगर) (?:आप|तुम) (?:इस|यह) (?:ईमेल|मेल|संदेश) (?:का )?(?:सारांश|सार)",
+        "\\b(?:jab|agar) (?:aap|tum) (?:is|yeh|ye) (?:email|mail) (?:ka )?(?:summary|saransh)\\b"
+      ]
+    }
+  ]
+}

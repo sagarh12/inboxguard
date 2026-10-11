@@ -1,0 +1,45 @@
+{
+  "language": "zh",
+  "coverage": "Small set in Simplified Chinese. Override, concealment, steering, payment-change and addressing phrases.",
+  "rules": [
+    {
+      "id": "zh.override.ignore-previous",
+      "category": "override",
+      "form": "light",
+      "patterns": [
+        "忽略(?:之前|以上|先前|上面|所有|前面)(?:的)?(?:所有)?(?:的)?(?:指令|指示|说明|规则)",
+        "你现在是",
+        "(?:开发者|管理员|维护)模式"
+      ]
+    },
+    {
+      "id": "zh.concealment",
+      "category": "concealment",
+      "form": "light",
+      "patterns": ["不要(?:告诉|通知|提醒)(?:用户|收件人)"]
+    },
+    {
+      "id": "zh.steering",
+      "category": "steering",
+      "form": "light",
+      "patterns": [
+        "(?:将|把)(?:这封|此)(?:邮件|电子邮件)(?:标记|标注|归类)为(?:紧急|安全|重要|合法|可信)"
+      ]
+    },
+    {
+      "id": "zh.money-data",
+      "category": "money-data",
+      "form": "light",
+      "patterns": [
+        "(?:更改|修改|更新)(?:付款|银行|收款|供应商)(?:信息|账户|详情|账号)",
+        "(?:泄露|显示|输出)(?:你的)?系统提示"
+      ]
+    },
+    {
+      "id": "zh.addressing",
+      "category": "addressing-ai",
+      "form": "light",
+      "patterns": ["当你(?:总结|处理)(?:这封|此)邮件"]
+    }
+  ]
+}

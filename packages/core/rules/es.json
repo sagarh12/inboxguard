@@ -1,0 +1,46 @@
+{
+  "language": "es",
+  "coverage": "Small set. Override, concealment, steering, payment-change and addressing phrases. Accents are removed before matching.",
+  "rules": [
+    {
+      "id": "es.override.ignore-previous",
+      "category": "override",
+      "patterns": [
+        "\\bignora(?:r)?(?: (?:todas|todos|las|tus|sus|los))* (?:instrucciones|indicaciones|ordenes|reglas) (?:anteriores|previas|de arriba)\\b",
+        "\\bahora eres\\b",
+        "\\bmodo (?:desarrollador|administrador|mantenimiento)\\b"
+      ]
+    },
+    {
+      "id": "es.concealment",
+      "category": "concealment",
+      "patterns": [
+        "\\bno (?:le )?(?:digas|informes|menciones|cuentes|reveles)(?: nada)?(?: esto)? al usuario\\b",
+        "\\bsin (?:informar|avisar) al usuario\\b"
+      ]
+    },
+    {
+      "id": "es.steering",
+      "category": "steering",
+      "patterns": [
+        "\\bmarca(?:r)? (?:este|el) (?:correo|mensaje|email) como (?:urgente|seguro|legitimo|importante|prioritario)\\b"
+      ]
+    },
+    {
+      "id": "es.money-data",
+      "category": "money-data",
+      "patterns": [
+        "\\b(?:cambia|cambiar|actualiza|actualizar|modifica|modificar) (?:los |sus |tus )?datos (?:bancarios|de pago|del proveedor)\\b",
+        "\\b(?:revela|muestra) (?:tu|el) prompt (?:del sistema|de sistema)\\b"
+      ]
+    },
+    {
+      "id": "es.addressing",
+      "category": "addressing-ai",
+      "patterns": [
+        "\\bcuando (?:resumas|proceses) (?:este|el) (?:correo|mensaje|email)\\b",
+        "\\bsi eres una? (?:ia|asistente)\\b"
+      ]
+    }
+  ]
+}

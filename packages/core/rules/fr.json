@@ -1,0 +1,49 @@
+{
+  "language": "fr",
+  "coverage": "Small set. Override, concealment, steering, payment-change and addressing phrases. Accents are removed before matching.",
+  "rules": [
+    {
+      "id": "fr.override.ignore-previous",
+      "category": "override",
+      "patterns": [
+        "\\bignore[rz]?(?: (?:toutes|tous|les|vos|tes|des))* (?:instructions|consignes|directives|regles|ordres) (?:precedentes|anterieures|ci dessus|ci-dessus|initiales)\\b",
+        "\\boublie[rz]? (?:tout|toutes (?:les|vos) (?:instructions|consignes))\\b",
+        "\\b(?:tu es|vous etes) (?:maintenant|desormais)\\b",
+        "\\bmode (?:developpeur|administrateur|maintenance|debogage)\\b"
+      ]
+    },
+    {
+      "id": "fr.concealment",
+      "category": "concealment",
+      "patterns": [
+        "\\bne (?:le |lui |rien )?(?:dites|dis|mentionnez|mentionne|signalez|revelez)(?: rien| pas)?(?: cela| ceci)? a lutilisateur\\b",
+        "\\bsans (?:informer|prevenir|avertir) (?:lutilisateur|le destinataire)\\b"
+      ]
+    },
+    {
+      "id": "fr.steering",
+      "category": "steering",
+      "patterns": [
+        "\\bmarque[rz]? (?:cet|ce|le) (?:email|e mail|courriel|message|mail) comme (?:urgent|important|sur|legitime|fiable|prioritaire)\\b",
+        "\\b(?:ce|cet) (?:courriel|email|message) est (?:sur|legitime|fiable|authentique)\\b"
+      ]
+    },
+    {
+      "id": "fr.money-data",
+      "category": "money-data",
+      "patterns": [
+        "\\b(?:change[rz]?|modifie[rz]?|mettre a jour|mettez a jour) (?:les |vos |nos )?(?:coordonnees|informations|details|donnees) (?:bancaires|de paiement|du fournisseur)\\b",
+        "\\b(?:revele[rz]?|affiche[rz]?|montre[rz]?) (?:ton|votre) (?:prompt systeme|invite systeme|configuration)\\b"
+      ]
+    },
+    {
+      "id": "fr.addressing",
+      "category": "addressing-ai",
+      "patterns": [
+        "\\b(?:lorsque|quand|si) (?:vous resumez|tu resumes) (?:ce|cet) (?:courriel|email|message|mail)\\b",
+        "\\bsi (?:vous etes|tu es) une? (?:ia|intelligence artificielle|assistant)\\b",
+        "\\bnote (?:pour|a) lia\\b"
+      ]
+    }
+  ]
+}

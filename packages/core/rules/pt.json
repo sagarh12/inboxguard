@@ -1,0 +1,39 @@
+{
+  "language": "pt",
+  "coverage": "Small set. Override, concealment, steering, payment-change and addressing phrases. Accents are removed before matching.",
+  "rules": [
+    {
+      "id": "pt.override.ignore-previous",
+      "category": "override",
+      "patterns": [
+        "\\bignor(?:e|ar|a)(?: (?:todas|todos|as|os|suas))* (?:instrucoes|ordens|regras) (?:anteriores|previas|acima)\\b",
+        "\\bagora voce e\\b",
+        "\\bmodo (?:desenvolvedor|administrador|manutencao)\\b"
+      ]
+    },
+    {
+      "id": "pt.concealment",
+      "category": "concealment",
+      "patterns": ["\\bnao (?:conte|diga|informe|mencione)(?: nada)?(?: isso)? ao usuario\\b"]
+    },
+    {
+      "id": "pt.steering",
+      "category": "steering",
+      "patterns": [
+        "\\bmarque (?:este|o) (?:email|e mail|mensagem) como (?:urgente|seguro|legitimo|importante|prioritario)\\b"
+      ]
+    },
+    {
+      "id": "pt.money-data",
+      "category": "money-data",
+      "patterns": [
+        "\\b(?:altere|alterar|atualize|atualizar|mude|mudar) os dados (?:bancarios|de pagamento|do fornecedor)\\b"
+      ]
+    },
+    {
+      "id": "pt.addressing",
+      "category": "addressing-ai",
+      "patterns": ["\\bquando voce (?:resumir|processar) (?:este|o) (?:email|e mail|mensagem)\\b"]
+    }
+  ]
+}

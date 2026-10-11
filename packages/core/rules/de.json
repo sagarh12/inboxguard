@@ -1,0 +1,42 @@
+{
+  "language": "de",
+  "coverage": "Small set. Override, concealment, steering, payment-change and addressing phrases. Umlauts are folded before matching.",
+  "rules": [
+    {
+      "id": "de.override.ignore-previous",
+      "category": "override",
+      "patterns": [
+        "\\bignorier(?:e|en)?(?: sie)?(?: alle)? (?:vorherigen|bisherigen|obigen|fruheren|vorigen) (?:anweisungen|instruktionen|befehle|regeln)\\b",
+        "\\bdu bist (?:jetzt|nun|ab sofort)\\b",
+        "\\b(?:entwickler|wartungs|admin)modus\\b"
+      ]
+    },
+    {
+      "id": "de.concealment",
+      "category": "concealment",
+      "patterns": [
+        "\\b(?:sage|sagen sie|erzahle|erwahne) (?:dem|der) (?:benutzer|nutzer|empfanger|benutzerin)(?: davon)? nichts\\b",
+        "\\bohne (?:den|die) (?:benutzer|nutzer|empfanger) zu (?:informieren|benachrichtigen)\\b"
+      ]
+    },
+    {
+      "id": "de.steering",
+      "category": "steering",
+      "patterns": [
+        "\\bmarkiere(?:n sie)? diese (?:e mail|email|nachricht) als (?:dringend|sicher|wichtig|legitim|vertrauenswurdig)\\b"
+      ]
+    },
+    {
+      "id": "de.money-data",
+      "category": "money-data",
+      "patterns": [
+        "\\b(?:andere|andern sie|aktualisiere|aktualisieren sie) (?:die )?(?:bankverbindung|zahlungsdaten|kontodaten|lieferantendaten|iban)\\b"
+      ]
+    },
+    {
+      "id": "de.addressing",
+      "category": "addressing-ai",
+      "patterns": ["\\bwenn (?:du|sie) diese (?:e mail|email|nachricht) zusammenfass(?:t|en|st)\\b"]
+    }
+  ]
+}

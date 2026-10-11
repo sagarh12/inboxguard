@@ -1,0 +1,136 @@
+{
+  "language": "en",
+  "coverage": "Main rule set. Phrases seen in public prompt-injection research and the Barracuda campaign write-up.",
+  "rules": [
+    {
+      "id": "en.override.ignore-previous",
+      "category": "override",
+      "patterns": [
+        "\\b(?:ignore|disregard|forget|override|bypass|skip|discard)(?: (?:all|any|the|your|these|those|my|of|every))*(?: (?:previous|prior|above|earlier|preceding|original|existing|system|other|old|initial))+ (?:instructions?|prompts?|rules|directions|guidelines|context|messages?|commands?|directives?|orders)\\b",
+        "\\bforget (?:everything|all)(?: (?:you|that) (?:were|have been|was) (?:told|given)| above| before| previous| else)?\\b"
+      ],
+      "compact": [
+        "ignorepreviousinstructions",
+        "ignoreallpreviousinstructions",
+        "ignoreallpriorinstructions",
+        "ignoretheaboveinstructions",
+        "disregardpreviousinstructions",
+        "disregardallpreviousinstructions",
+        "ignoreyourinstructions"
+      ]
+    },
+    {
+      "id": "en.override.new-instructions",
+      "category": "override",
+      "patterns": [
+        "\\b(?:your |the )?new (?:instructions|directives?|system prompt|task is|orders)\\b",
+        "\\b(?:updated|revised|real|actual|true) (?:instructions|system prompt)\\b"
+      ]
+    },
+    {
+      "id": "en.override.role-change",
+      "category": "override",
+      "patterns": [
+        "\\byou are now (?:a|an|in|the|my|no longer)\\b",
+        "\\bfrom now on(?: you)? (?:are|will|must|should|act)\\b",
+        "\\bact as (?:if you|though you|my|an? (?:ai|assistant|unrestricted|unfiltered|different|new|evil|system|administrator))\\b",
+        "\\bpretend (?:to be|you are|that you are)\\b",
+        "\\b(?:developer|admin|administrator|maintenance|debug|god|jailbreak|dan|unrestricted|sudo|service) mode\\b"
+      ]
+    },
+    {
+      "id": "en.role-marker.chat-template",
+      "category": "role-marker",
+      "form": "light",
+      "patterns": [
+        "\\[(?:system|inst|instruction|instructions|assistant|admin)\\]",
+        "\\[/inst\\]",
+        "<\\|(?:im_start|im_end|system|user|assistant|endoftext)\\|>",
+        "<<sys>>",
+        "(?:^|\\n) ?#{2,} ?(?:instruction|instructions|system|response|new task)\\b",
+        "(?:^|[\\s>\\]])(?:system|assistant) ?: ",
+        "</?(?:system|instructions?|sys|admin)>"
+      ]
+    },
+    {
+      "id": "en.addressing.ai",
+      "category": "addressing-ai",
+      "patterns": [
+        "\\b(?:when|if|while|before|after) (?:you |you are |you re |youre )?(?:summari[sz]ing|summari[sz]e|processing|analy[sz]ing|parsing|triaging|ranking|screening|scoring|classifying|evaluating)(?: this| the)?(?: email| message| mail| thread| document| resume| cv| ticket| text| page| application| candidate)?\\b",
+        "\\bnote (?:to|for) (?:the |any )?(?:ai|a i|model|llm|assistant|agent|bot|chatbot|copilot|language model)\\b",
+        "\\b(?:dear|hello|hi|hey|attention|attn) (?:ai|a i|assistant|model|llm|chatbot|copilot|gemini|chatgpt|claude|agent)\\b",
+        "\\bif you are (?:an? )?(?:ai|a i|llm|large language model|language model|assistant|bot|chatbot|agent|automated system)\\b",
+        "\\b(?:as|you are) an? (?:ai|a i|llm|language model) (?:assistant |model |agent )?(?:you|reading|processing|summari[sz]ing|must|should)\\b",
+        "\\b(?:to|for) (?:the|any|all) (?:ai|a i|llm|assistant|model|agent|bot)s? (?:reading|processing|summari[sz]ing|parsing|analy[sz]ing|handling)\\b",
+        "\\b(?:ai|llm|assistant|model|agent|copilot|gemini|chatgpt|claude)(?: assistant)? (?:please|you must|you should|you will|must|should) (?:ignore|not|always|never|include|add|mark|say|tell|report|respond|reply|rate|forward|send)\\b",
+        "\\b(?:automated|ai) (?:systems?|assistants?|agents?|tools?) (?:must|should|are instructed to|need to)\\b"
+      ]
+    },
+    {
+      "id": "en.addressing.vocative",
+      "category": "addressing-ai",
+      "form": "light",
+      "patterns": [
+        "(?:^|[\\s.!>(\\[])(?:ai|a\\.i\\.|llm|ai assistant|ai agent|assistant|model|chatbot|copilot|gemini|chatgpt|claude) ?[:,] ?(?:please |you must |you should |you will )?(?:ignore|disregard|forget|do not|don't|never|always|mark|say|tell|rate|forward|send|include|add|reply|respond|print|reveal|summari[sz]e|classify|treat|describe|insert|you are)\\b"
+      ]
+    },
+    {
+      "id": "en.concealment",
+      "category": "concealment",
+      "patterns": [
+        "\\b(?:do not|dont|never|don t|must not) (?:tell|inform|mention|reveal|disclose|alert|notify|show|say|warn)(?: this| it| anything| about this| about it)?(?: to)?(?: the)? (?:user|recipient|reader|human|anyone|them|employee|customer)s?\\b",
+        "\\bwithout (?:telling|informing|notifying|alerting|asking|warning|mentioning it to) (?:the )?(?:user|recipient|reader|human|anyone|them)\\b",
+        "\\b(?:silently|secretly|quietly|covertly|discreetly) (?:forward|send|add|change|delete|insert|include|update|replace|approve|execute|run|click|transfer)\\b",
+        "\\bkeep this (?:secret|hidden|confidential) from\\b",
+        "\\b(?:hide|omit|remove|do not mention|dont mention|never mention) (?:this|these) (?:instruction|instructions|note|message|text)\\b",
+        "\\bthe user (?:must|should) not (?:know|see|be told|find out)\\b"
+      ]
+    },
+    {
+      "id": "en.steering.summary",
+      "category": "steering",
+      "patterns": [
+        "\\b(?:mark|flag|label|classify|treat|categori[sz]e|report|describe|present|summari[sz]e|tag|consider)(?: this| the| it)?(?: email| message| mail| sender| invoice| request| thread)? as (?:urgent|important|safe|legitimate|legit|trusted|verified|high priority|top priority|genuine|authentic|not spam|not phishing|priority|clean|benign|time sensitive)\\b",
+        "\\b(?:this|the) (?:email|message|sender|invoice|request|link|attachment) is (?:safe|legitimate|verified|trusted|genuine|authentic|not (?:spam|phishing|a scam|malicious))\\b",
+        "\\b(?:rate|score|rank|grade|evaluate)(?: this| the)?(?: candidate| applicant| resume| cv| application| person)?(?: as| at| with)? (?:10|ten)(?: out of| of)?(?: 10| ten)\\b",
+        "\\b(?:highly|strongly) recommend (?:this|the) (?:candidate|applicant)\\b",
+        "\\b(?:the )?(?:best|perfect|ideal|strongest|most qualified) (?:candidate|applicant)(?: for)?(?: this| the)? (?:role|position|job)?\\b.{0,40}\\b(?:hire|interview|advance|shortlist)\\b",
+        "\\badd (?:a |an |the )?(?:priority|urgent|high priority) (?:action|task|item|to do|todo|action item)\\b",
+        "\\b(?:priority|urgent|required) action(?: item)?s?(?: for the user)?(?: is| are)? (?:to |update|change|verify|confirm|pay|approve)\\b"
+      ]
+    },
+    {
+      "id": "en.money-data.payment-change",
+      "category": "money-data",
+      "patterns": [
+        "\\b(?:change|update|replace|modify|switch|amend)(?: the| our| their| your| all| its)?(?: (?:vendor|supplier|payee|beneficiary|payment|bank|banking|remittance|account|wire|routing|deposit|payroll|direct deposit))+ (?:details|information|info|account|accounts|number|numbers|instructions|records)\\b",
+        "\\b(?:wire|transfer|send|remit|pay) (?:the )?(?:funds|money|payment|amount|invoice|balance|outstanding)\\b(?: to)?",
+        "\\b(?:new|updated|changed) (?:bank|banking|payment|remittance|wire) (?:details|information|account|instructions)\\b"
+      ]
+    },
+    {
+      "id": "en.money-data.exfiltrate",
+      "category": "money-data",
+      "patterns": [
+        "\\bforward (?:this|all|every|the|these|any)(?: of the| of my| of the user s)?(?: (?:email|emails|messages|mail|conversation|thread|inbox|invoices|contacts|attachments))+(?: to)?\\b",
+        "\\b(?:send|email|forward|post|upload|share|copy|exfiltrate) (?:all |the |any |every |a copy of |a list of )?(?:the user s |users |the users )?(?:emails?|messages?|contacts?|attachments?|files?|documents?|passwords?|credentials?|conversation|chat history|history|inbox|address book|calendar) to\\b",
+        "\\b(?:reveal|print|show|output|repeat|display|disclose|share|tell me|leak|dump|list|return|provide|include)(?: me)?(?: your| the| all| all of your| full| complete)? (?:system prompt|initial prompt|hidden prompt|original instructions|internal instructions|configuration|config|system message|hidden rules|api keys?|secrets?|credentials|environment variables|tool list|developer message)\\b"
+      ]
+    },
+    {
+      "id": "en.code.poisoning",
+      "category": "code-poisoning",
+      "patterns": [
+        "\\b(?:add|insert|include|inject|append|put|write|place) (?:a |an |the |this |following |one )?(?:line|snippet|code|function|call|request|hook|script|command|statement|dependency)s?\\b.{0,120}?\\b(?:sends?|posts?|uploads?|exfiltrates?|transmits?|forwards?|fetch|fetches|curl|beacons?|reports?)\\b.{0,80}?\\b(?:credentials?|tokens?|secrets?|api keys?|passwords?|env|environment variables?|ssh keys?|cookies?|aws|private keys?)\\b"
+      ]
+    },
+    {
+      "id": "en.code.exfil-snippet",
+      "category": "code-poisoning",
+      "form": "light",
+      "patterns": [
+        "(?:fetch|axios\\.post|axios|requests\\.post|requests\\.get|curl|wget|http\\.request|urllib|navigator\\.sendbeacon|xmlhttprequest)[^\\n]{0,200}?(?:process\\.env|os\\.environ|getenv\\(|\\$\\{?[a-z_]{0,40}(?:token|secret|key|password)|\\.aws/credentials|\\.ssh/id_|document\\.cookie|localstorage|github_token|npm_token)"
+      ]
+    }
+  ]
+}
