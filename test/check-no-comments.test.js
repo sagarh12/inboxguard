@@ -9,6 +9,11 @@ test('finds line and block comments', () => {
   assert.equal(findComments('const a = 1; // note\n/* block */').length, 2);
 });
 
+test('allows a shebang line', () => {
+  assert.equal(findComments('#!/usr/bin/env node\nexport const a = 1;\n').length, 0);
+  assert.equal(findComments('#!/usr/bin/env node\n// hi\n').length, 1);
+});
+
 test('ignores comment-like text inside strings and regexes', () => {
   assert.equal(findComments("const a = '// not a comment'; const b = /\\/\\*x/;").length, 0);
 });

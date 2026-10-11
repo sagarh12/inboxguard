@@ -12,7 +12,10 @@ export function findComments(source) {
     sourceType: 'module',
     allowHashBang: true,
     locations: true,
-    onComment: (block, text, start, end, startLoc) => comments.push({ line: startLoc.line, text }),
+    onComment: (block, text, start, end, startLoc) => {
+      if (start === 0 && source.startsWith('#!')) return;
+      comments.push({ line: startLoc.line, text });
+    },
   });
   return comments;
 }
