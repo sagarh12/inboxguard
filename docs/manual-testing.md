@@ -30,6 +30,7 @@ For each message:
 4. For a red message, open DevTools and confirm the hidden element has `data-inboxguard-neutralized` and no text.
 5. Switch the operating system to dark mode and check the banner is readable.
 6. Open a conversation with several messages. Each message gets its own banner.
+7. Go back to the inbox. The row for the red message has a red stripe on its left edge. Hover it to see the inboxguard tooltip.
 
 Gmail strips HTML comments before rendering, so a comment-only attack shows green in the extension. The proxy catches it, because the proxy sees the raw message.
 

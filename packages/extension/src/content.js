@@ -4,7 +4,13 @@ import {
   parseColor,
   colorsNearlyEqual,
 } from '@inboxguard/core';
-import { siteForHost, findMessageBodies, findMessageContainers } from './selectors.js';
+import {
+  siteForHost,
+  findMessageBodies,
+  findMessageContainers,
+  messageIdFor,
+} from './selectors.js';
+import { createRowMarker } from './inbox-rows.js';
 import { createBanner } from './banner.js';
 import { loadSettings, onSettingsChanged, DEFAULT_SETTINGS } from './settings.js';
 
@@ -140,6 +146,7 @@ export function createScanner({
   const scanned = new WeakSet();
   const flagged = new WeakSet();
   const current = { settings };
+  const rows = createRowMarker({ document: doc, site, inspect });
 
   const place = (anchor, report) => {
     const banner = createBanner(doc, report);
@@ -156,6 +163,7 @@ export function createScanner({
     const elapsedMs = (view.performance?.now?.() ?? Date.now()) - started;
     const state = stateFor(result);
     const shouldNeutralize = current.settings.neutralize && (state === 'amber' || state === 'red');
+    if (state === 'red') rows.rememberRed(messageIdFor(body, site));
     const neutralized = shouldNeutralize ? quietly(() => neutralizeHidden(body, view), 0) : 0;
     return place(body, { state, findings: result.findings, elapsedMs, neutralized });
   };
@@ -175,6 +183,7 @@ export function createScanner({
         quietly(() => scanBody(body));
       }
       markUncheckable();
+      if (current.settings.markInbox) quietly(() => rows.markRows());
     });
 
   let timer = null;
@@ -200,6 +209,7 @@ export function createScanner({
     },
     updateSettings(next) {
       current.settings = { ...current.settings, ...next };
+      if (!current.settings.markInbox) quietly(() => rows.clear());
     },
   };
 }

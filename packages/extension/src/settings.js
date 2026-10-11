@@ -1,4 +1,4 @@
-export const DEFAULT_SETTINGS = Object.freeze({ neutralize: true });
+export const DEFAULT_SETTINGS = Object.freeze({ neutralize: true, markInbox: true });
 
 function storageArea() {
   try {
@@ -13,7 +13,7 @@ export async function loadSettings() {
   if (!area) return { ...DEFAULT_SETTINGS };
   try {
     const stored = await area.get(DEFAULT_SETTINGS);
-    return { ...DEFAULT_SETTINGS, neutralize: stored.neutralize !== false };
+    return { neutralize: stored.neutralize !== false, markInbox: stored.markInbox !== false };
   } catch {
     return { ...DEFAULT_SETTINGS };
   }
@@ -22,14 +22,20 @@ export async function loadSettings() {
 export async function saveSettings(settings) {
   const area = storageArea();
   if (!area) return;
-  await area.set({ neutralize: Boolean(settings.neutralize) });
+  await area.set({
+    neutralize: Boolean(settings.neutralize),
+    markInbox: Boolean(settings.markInbox),
+  });
 }
 
 export function onSettingsChanged(callback) {
   try {
     globalThis.chrome?.storage?.onChanged?.addListener((changes, areaName) => {
-      if (areaName === 'sync' && changes.neutralize)
-        callback({ neutralize: changes.neutralize.newValue !== false });
+      if (areaName !== 'sync') return;
+      const next = {};
+      if (changes.neutralize) next.neutralize = changes.neutralize.newValue !== false;
+      if (changes.markInbox) next.markInbox = changes.markInbox.newValue !== false;
+      if (Object.keys(next).length > 0) callback(next);
     });
   } catch {
     return;

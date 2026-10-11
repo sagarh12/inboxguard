@@ -18,6 +18,11 @@
         Clear hidden text in the page when a message is amber or red, so a browser-based AI agent
         does not read it
       </label>
+      <label>
+        <input type="checkbox" id="markInbox" />
+        Mark inbox rows in red when the subject or preview looks like it carries instructions for an
+        AI, or when an opened message was red
+      </label>
       <p id="status" role="status" aria-live="polite"></p>
     </main>
     <script src="options.js"></script>

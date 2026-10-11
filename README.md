@@ -97,7 +97,9 @@ Banner states:
 - red: hidden instructions aimed at AI found
 - grey: unable to check this message, or the message is over 2 MB
 
-The extension asks only for the `storage` permission. It makes no network calls and stores nothing from email. By default it clears hidden text in amber and red messages, so a browser-based AI agent reading the page does not see it. It never removes Gmail or Outlook structure nodes.
+In the inbox list, the extension also checks each row's subject and preview text. A row gets a red stripe on its left edge and a light red tint when the preview looks like it carries instructions for an AI, or when the message showed a red banner after you opened it. Gmail builds the preview from the message text, hidden parts included, so hidden instructions often show up there. A clean row does not mean the full message is clean: the preview is short and has no styling information. Open the message to see the full check. Row marking can be turned off in the options.
+
+The extension asks only for the `storage` permission. It makes no network calls and stores nothing from email. The ids of messages that showed a red banner are kept in memory only, so their inbox rows stay marked until the page reloads. By default it clears hidden text in amber and red messages, so a browser-based AI agent reading the page does not see it. It never removes Gmail or Outlook structure nodes.
 
 ## Policy
 
