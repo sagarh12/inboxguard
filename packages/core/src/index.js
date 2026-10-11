@@ -14,7 +14,8 @@ import {
 } from './verdict.js';
 
 export { detectInstructions, isAddressedToAi, RULE_SETS } from './detect.js';
-export { analyzeInvisible, escapeForSnippet } from './unicode.js';
+export { analyzeInvisible, escapeForSnippet, stripAbusiveInvisible } from './unicode.js';
+export { parseColor, colorsNearlyEqual, colorFromBackground } from './colors.js';
 export { DEFAULT_LIMITS } from './limits.js';
 export {
   evaluateAction,
