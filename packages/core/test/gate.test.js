@@ -27,7 +27,7 @@ const table = [
   ['add_beneficiary', {}, 'approve', 'payee-change'],
   [
     'send_email',
-    { to: 'someone@example.net', subject: 'hi', body: 'hello' },
+    { to: 'someone@example.org', subject: 'hi', body: 'hello' },
     'approve',
     'outbound-mail',
   ],
@@ -159,7 +159,7 @@ test('payees.json mismatch gets a loud flag', () => {
     {
       tool: 'send_email',
       args: {
-        to: 'billing@northwind-payments.example.net',
+        to: 'billing@northwind-payments.example.org',
         body: 'Northwind Supplies invoice attached, wire today',
       },
     },
@@ -180,11 +180,11 @@ test('trusted domain allowlist allows internal mail without attachments only', (
   );
   assert.equal(withAttachment.decision, 'approve');
   const external = evaluateAction(
-    { tool: 'send_email', args: { to: ['team@example.com', 'x@example.net'] } },
+    { tool: 'send_email', args: { to: ['team@example.com', 'x@example.org'] } },
     trustedPolicy,
   );
   assert.equal(external.decision, 'approve');
-  assert.deepEqual(external.details.externalRecipients, ['x@example.net']);
+  assert.deepEqual(external.details.externalRecipients, ['x@example.org']);
   const internalMoney = evaluateAction(
     { tool: 'send_email', args: { to: 'team@example.com', body: 'please wire $5,000 now' } },
     trustedPolicy,
@@ -207,12 +207,12 @@ test('session taint forces approval for writes but not reads', () => {
 });
 
 test('deny wins over approve', () => {
-  const result = evaluateAction({ tool: 'send_password_reset', args: { to: 'x@example.net' } });
+  const result = evaluateAction({ tool: 'send_password_reset', args: { to: 'x@example.org' } });
   assert.equal(result.decision, 'deny');
   assert.equal(classifyTool('pay_with_api_key').decision, 'deny');
 });
 
 test('gate is deterministic', () => {
-  const call = { tool: 'send_email', args: { to: 'x@example.net', body: 'invoice $10' } };
+  const call = { tool: 'send_email', args: { to: 'x@example.org', body: 'invoice $10' } };
   assert.deepEqual(evaluateAction(call), evaluateAction(call));
 });

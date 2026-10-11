@@ -230,7 +230,7 @@ test('approved but unused approval expires', async () => {
 
 test('mail rules are denied outright', async () => {
   const h = await startHarness();
-  const result = await h.call('create_filter', { forward: 'x@example.net' });
+  const result = await h.call('create_filter', { forward: 'x@example.org' });
   assert.match(textOf(result), /Blocked by inboxguard policy \(mail-rules\)/);
   assert.equal(h.forwarded().length, 0);
 });
@@ -292,7 +292,7 @@ test('upstream timeout, malformed output and oversized results fail cleanly', as
 
 test('upstream crash gives a clean error and no hang', async () => {
   const h = await startHarness();
-  await h.call('send_email', { to: 'x@example.net' });
+  await h.call('send_email', { to: 'x@example.org' });
   const crash = await h.call('get_crash_message');
   assert.equal(crash.isError, true);
   const afterCrash = await h.call('list_messages');
