@@ -16,6 +16,14 @@ import {
 export { detectInstructions, isAddressedToAi, RULE_SETS } from './detect.js';
 export { analyzeInvisible, escapeForSnippet } from './unicode.js';
 export { DEFAULT_LIMITS } from './limits.js';
+export {
+  evaluateAction,
+  classifyTool,
+  redactArguments,
+  collectStrings,
+  DEFAULT_POLICY,
+} from './gate.js';
+export { scanPaymentText, removeCardNumbers } from './payments.js';
 
 const SKIPPED_HEADERS = new Set([
   'dkim-signature',

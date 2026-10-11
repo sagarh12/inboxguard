@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "categories": {
+    "credentials": {
+      "decision": "deny",
+      "toolPatterns": [
+        "password",
+        "otp",
+        "2fa",
+        "mfa",
+        "verification code",
+        "one time code",
+        "api key",
+        "apikey",
+        "access token",
+        "secret",
+        "credential"
+      ],
+      "appliesToReadOnly": true
+    },
+    "mail-rules": {
+      "decision": "deny",
+      "toolPatterns": [
+        "filter",
+        "rule",
+        "auto forward",
+        "autoforward",
+        "forwarding",
+        "delegate",
+        "delegation",
+        "vacation",
+        "auto reply",
+        "autoreply"
+      ]
+    },
+    "payment": {
+      "decision": "approve",
+      "toolPatterns": [
+        "pay",
+        "payment",
+        "transfer",
+        "wire",
+        "purchase",
+        "checkout",
+        "send money",
+        "remit",
+        "buy",
+        "place order",
+        "refund",
+        "charge"
+      ]
+    },
+    "payee-change": {
+      "decision": "approve",
+      "toolPatterns": [
+        "payee",
+        "beneficiary",
+        "vendor",
+        "supplier",
+        "bank account",
+        "bank details",
+        "banking",
+        "recipient account",
+        "iban"
+      ]
+    },
+    "outbound-mail": {
+      "decision": "approve",
+      "toolPatterns": ["send", "reply", "forward", "compose", "respond", "submit draft"],
+      "trustedDomains": [],
+      "allowTrustedWithoutAttachments": true
+    },
+    "destructive": {
+      "decision": "approve",
+      "toolPatterns": ["delete", "trash", "remove", "purge", "destroy", "erase", "empty", "wipe"]
+    },
+    "sharing": {
+      "decision": "approve",
+      "toolPatterns": [
+        "share",
+        "permission",
+        "permissions",
+        "acl",
+        "grant",
+        "invite",
+        "collaborator",
+        "publish"
+      ]
+    }
+  },
+  "readOnlyPatterns": [
+    "get",
+    "list",
+    "search",
+    "read",
+    "fetch",
+    "find",
+    "query",
+    "view",
+    "show",
+    "lookup",
+    "count",
+    "describe",
+    "download"
+  ],
+  "writePatterns": [
+    "send",
+    "create",
+    "update",
+    "delete",
+    "modify",
+    "set",
+    "add",
+    "insert",
+    "remove",
+    "move",
+    "archive",
+    "label",
+    "mark",
+    "patch",
+    "put",
+    "post",
+    "upload",
+    "write",
+    "edit",
+    "save",
+    "apply",
+    "execute",
+    "run",
+    "forward",
+    "reply",
+    "share",
+    "grant",
+    "transfer",
+    "pay",
+    "trash",
+    "draft",
+    "schedule",
+    "accept",
+    "decline",
+    "invite",
+    "approve",
+    "submit",
+    "change",
+    "rename",
+    "copy",
+    "compose",
+    "respond",
+    "purchase",
+    "buy",
+    "enable",
+    "disable",
+    "revoke",
+    "restore",
+    "import",
+    "export",
+    "sync",
+    "publish",
+    "unsubscribe",
+    "block"
+  ],
+  "unknownToolDecision": "approve",
+  "contentChecks": true,
+  "sessionTaint": true
+}
